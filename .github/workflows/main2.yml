@@ -3,7 +3,7 @@ name: Prisma Cloud Compute Image Scan
 on: [push, pull_request]
 
 env:
-  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
+  IMAGE_NAME: ubuntu:latest 
 
 jobs:
   # Jobs are ran independently from each other, so build and scan needs to be in a single job.
