@@ -3,8 +3,7 @@ name: Prisma Cloud Compute Image Scan
 on: [push, pull_request]
 
 env:
-  IMAGE_NAME: ubuntu:latest 
-  PASSWORD: 1234
+  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
 
 jobs:
   # Jobs are ran independently from each other, so build and scan needs to be in a single job.
@@ -20,20 +19,11 @@ jobs:
 
       - name: Download twistcli from the Prisma Cloud Compute Console
         run: |
-          curl --user jongwoonCI:1234 --output ./twistcli a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083/api/v1/util/twistcli
+          curl --user ${{ secrets.PCC_USER }}:${{ secrets.PCC_PASS }} --output ./twistcli ${{ secrets.PCC_CONSOLE_URL }}/api/v1/util/twistcli
           chmod a+x ./twistcli
-          pwd
-          ls -al
-          
 
-      - name: Build the image
-        run: sudo docker pull ubuntu:latest 
+      - name: pull the image
+        run: docker pull ubuntu:latest
 
-      - name: prepare scan
-        run: cd /home/runner/work/jwjw/jwjw/
-
- # ./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password $PASSWORD --details ubuntu:latest
-     
       - name: Scan the image
-        run: ./twistcli images scan --docker-address http://docker:2375 --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoon --password 1234 --details centos:latest
-        
+        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
