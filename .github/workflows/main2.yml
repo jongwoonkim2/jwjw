@@ -31,4 +31,4 @@ jobs:
 
       - name: Scan the image
         run: cd /home/runner/work/jwjw/jwjw  \
-             ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+             ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user ${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
