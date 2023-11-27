@@ -1,0 +1,49 @@
+#name: Aqua Security Image Scan
+name: Prisma Cloud Compute Image Scan
+
+on: [push, pull_request]
+
+env:
+  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
+
+jobs:
+  # Jobs are ran independently from each other, so build and scan needs to be in a single job.
+  build-and-scan:
+    name: Build and scan image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+        # Defaults are sufficient generally
+        # https://github.com/actions/checkout#usage
+
+        # Download Aqua Scanner
+      #- name: Aqua Credentials
+       # run: |
+          #wget --user ${{ secrets.AQUA_EMAIL }} --password ${{ secrets.AQUA_PASS }} https://download.aquasec.com/scanner/2022.4/scannercli
+
+      - name: Download twistcli from the Prisma Cloud Compute Console
+        run: |
+          curl --user ${{ secrets.PCC_USER }}:${{ secrets.PCC_PASS }} --output ./twistcli --insecure ${{ secrets.PCC_CONSOLE_URL }}/api/v1/util/twistcli
+          #curl --user test:123qwe\!@# --output ./twistcli --insecure https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083/api/v1/util/twistcli
+          chmod a+x ./twistcli
+
+      - name: ls
+        run: ls -al
+
+      - name: docker info
+        run: docker version
+  
+      - name: Build the image
+        run: docker build -t $IMAGE_NAME .
+
+      # Scan the image with Aqua Scanner
+      #- name: Aqua Scanner
+       # run: |
+        #  chmod +x scannercli
+         # ./scannercli scan -U ${{ secrets.AQUA_SERVER_USER }} --token ${{ secrets.AQUA_SCANNER_PASS }} -H ${{ secrets.AQUA_HOST }} $IMAGE_NAME --local
+        
+      - name: Scan the image with Twistcli
+        run: ./twistcli images scan --address  ${{ secrets.PCC_CONSOLE_URL }} --user ${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details $IMAGE_NAME
+        #run: ./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user test --password 123qwe\!@# --details $IMAGE_NAME
