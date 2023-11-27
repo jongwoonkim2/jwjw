@@ -25,9 +25,8 @@ jobs:
 
       - name: pull the image
         run: docker pull ubuntu:latest
-        ls -al
+             ls -al
 
       - name: Scan the image
-        run: |
-        ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
-        ls -al
+        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+             ls -al
