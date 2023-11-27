@@ -23,9 +23,9 @@ jobs:
           chmod a+x ./twistcli
           ls -al
 
-      - name: pull the image
-        run: docker pull ubuntu:latest
+      - name: build the image
+        run: docker build -t my-nginx-image .
              
 
       - name: Scan the image
-        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details my-nginx-image
