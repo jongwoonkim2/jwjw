@@ -19,11 +19,11 @@ jobs:
 
       - name: Download twistcli from the Prisma Cloud Compute Console
         run: |
-          curl --user ${{ secrets.PCC_USER }}:${{ secrets.PCC_PASS }} --output ./twistcli ${{ secrets.PCC_CONSOLE_URL }}/api/v1/util/twistcli
+          curl --user jongwoon:1234 --output ./twistcli a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083/api/v1/util/twistcli
           chmod a+x ./twistcli
 
       - name: Build the image
         run: docker build -t $IMAGE_NAME .
 
       - name: Scan the image
-        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details $IMAGE_NAME
+        run: ./twistcli images scan --address a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoon --password 1234 --details $IMAGE_NAME
