@@ -23,6 +23,7 @@ jobs:
           curl --user jongwoonCI:1234 --output ./twistcli a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083/api/v1/util/twistcli
           chmod a+x ./twistcli
           pwd
+          ls -al
           
 
       - name: Build the image
