@@ -24,8 +24,9 @@ jobs:
           ls
 
       - name: Build the image
-        run: docker pull ubuntu:latest
-        ls
+        run: docker pull ubuntu:latest 
+             ls
+
         
 
       - name: Scan the image
