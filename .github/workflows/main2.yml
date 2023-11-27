@@ -31,6 +31,9 @@ jobs:
 
       - name: prepare scan
         run: cd /home/runner/work/jwjw/jwjw/
-        
+
+ # ./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password $PASSWORD --details ubuntu:latest
+     
       - name: Scan the image
-        run: ./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password $PASSWORD --details ubuntu:latest
+        run: ./twistcli images scan --docker-address http://docker:2375 --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoon --password 1234 --details centos:latest
+        
