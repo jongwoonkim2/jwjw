@@ -23,11 +23,12 @@ jobs:
           chmod a+x ./twistcli
           pwd
           ls -al
-          cd pwd
+          
 
       - name: pull the image
         run: docker pull ubuntu:latest
              
 
       - name: Scan the image
-        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+        run: cd /home/runner/work/jwjw/jwjw
+             ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user $${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
