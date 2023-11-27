@@ -23,6 +23,7 @@ jobs:
           chmod a+x ./twistcli
           pwd
           ls -al
+          cd pwd
 
       - name: pull the image
         run: docker pull ubuntu:latest
