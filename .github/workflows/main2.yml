@@ -22,7 +22,7 @@ jobs:
           curl --user ${{ secrets.PCC_USER }}:${{ secrets.PCC_PASS }} --output ./twistcli ${{ secrets.PCC_CONSOLE_URL }}/api/v1/util/twistcli
           chmod a+x ./twistcli
           pwd
-          ls -al
+          cd /home/runner/work/jwjw/jwjw
           
 
       - name: pull the image
@@ -30,5 +30,4 @@ jobs:
              
 
       - name: Scan the image
-        run: cd /home/runner/work/jwjw/jwjw  \
-             ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user ${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+        run: ./twistcli images scan --address ${{ secrets.PCC_CONSOLE_URL }} --user ${{ secrets.PCC_USER }} --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
