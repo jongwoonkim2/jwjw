@@ -24,7 +24,7 @@ jobs:
           ls -al
 
       - name: build the image
-        run: docker build -t my-nginx-image .github/workflows/Dokerfile
+        run: docker build -t my-nginx-image github/workflows/Dokerfile
              
 
       - name: Scan the image
