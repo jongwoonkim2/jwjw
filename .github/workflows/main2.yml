@@ -24,7 +24,7 @@ jobs:
           ls
 
       - name: Build the image
-        run: docker pull ubuntu:latest 
+        run: sudo docker pull ubuntu:latest 
              ls
 
         
