@@ -24,8 +24,7 @@ jobs:
           ls -al
 
       - name: pull the image
-        run: |
-        docker pull ubuntu:latest
+        run: docker pull ubuntu:latest
         ls -al
 
       - name: Scan the image
