@@ -21,6 +21,7 @@ jobs:
         run: |
           curl --user ${{ secrets.PCC_USER }}:${{ secrets.PCC_PASS }} --output ./twistcli ${{ secrets.PCC_CONSOLE_URL }}/api/v1/util/twistcli
           chmod a+x ./twistcli
+          pwd
           ls -al
 
       - name: pull the image
