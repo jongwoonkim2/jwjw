@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 env:
   IMAGE_NAME: ubuntu:latest 
+  PASSWORD: 1234
 
 jobs:
   # Jobs are ran independently from each other, so build and scan needs to be in a single job.
@@ -28,4 +29,4 @@ jobs:
         run: sudo docker pull ubuntu:latest 
              
       - name: Scan the image
-        run: /home/ubuntu/prisma_cloud/./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password 1234 --details ubuntu:latest
+        run: sudo /home/ubuntu/prisma_cloud/./twistcli images scan --address https://a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password $PASSWORD --details ubuntu:latest
