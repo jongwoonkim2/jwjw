@@ -28,4 +28,4 @@ jobs:
         run: sudo docker pull ubuntu:latest 
              
       - name: Scan the image
-        run: sudo /home/ubuntu/prisma_cloud/./twistcli images scan --address a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password ${{ secrets.PCC_PASS }} --details ubuntu:latest
+        run: echo "1234" | sudo -S /home/ubuntu/prisma_cloud/./twistcli images scan --address a912b3b1b642f474e9d8c7e3c6a1ab94-713768258.ap-northeast-2.elb.amazonaws.com:8083 --user jongwoonCI --password=IGNORED --details ubuntu:latest
